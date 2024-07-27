@@ -11,7 +11,7 @@ export default function Home() {
   const initialNodes: Node[] = [
     {
       id: "node-1",
-      type: "textUpdater" as Position,
+      type: "textUpdater",
       position: { x: 0, y: 0 },
       data: { value: 123 },
     },
