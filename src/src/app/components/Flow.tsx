@@ -5,6 +5,7 @@ import {
   applyNodeChanges,
   applyEdgeChanges,
   addEdge,
+  Position,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback } from "react";
@@ -13,9 +14,9 @@ type Props = {
   nodes: {
     id: string;
     type: string;
-    targetPosition: string;
+    targetPosition?: Position;
     position: { x: number; y: number };
-    data: { label: string };
+    data: { label?: string };
   }[];
 
   edges: {
@@ -44,7 +45,7 @@ export default function Flow({ nodes, edges, setNodes, setEdges }: Props) {
     []
   );
 
-//   Edgeの関連性の制御
+  //   Edgeの関連性の制御
   const onConnect = useCallback(
     (params: any) => setEdges((eds: Props["edges"]) => addEdge(params, eds)),
     []
