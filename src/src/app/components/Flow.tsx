@@ -6,18 +6,13 @@ import {
   applyEdgeChanges,
   addEdge,
   Position,
+  Node
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useCallback } from "react";
 
 type Props = {
-  nodes: {
-    id: string;
-    type: string;
-    targetPosition?: Position;
-    position: { x: number; y: number };
-    data: { label?: string };
-  }[];
+  nodes: Node[];
 
   edges: {
     id: string;
