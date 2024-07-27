@@ -3,12 +3,12 @@
 import { Layout, Menu, theme, Flex } from "antd";
 import Flow from "./components/Flow";
 import { useState } from "react";
-import { Position } from "@xyflow/react";
+import { Node, Position } from "@xyflow/react";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Home() {
-  const initialNodes = [
+  const initialNodes: Node[] = [
     {
       id: "node-1",
       type: "textUpdater" as Position,

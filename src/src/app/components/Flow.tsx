@@ -29,7 +29,7 @@ export default function Flow({ nodes, edges, setNodes, setEdges }: Props) {
   // Nodeを操作した時の処理
   const onNodesChange = useCallback(
     (changes: any) =>
-      setNodes((nds: Props["nodes"]) => applyNodeChanges(changes, nds)),
+      setNodes((nds: Node[]) => applyNodeChanges(changes, nds)),
     []
   );
 
