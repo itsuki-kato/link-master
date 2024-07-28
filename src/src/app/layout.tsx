@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -11,6 +12,8 @@ import {
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import "./globals.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { baseUrl } from "@/common/constaints";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -20,7 +23,7 @@ function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[],
+  children?: MenuItem[]
 ): MenuItem {
   return {
     key,
@@ -31,18 +34,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
+  getItem("トピクラ", "topic-cluster", <TeamOutlined />, [
+    getItem("管理", "management"),
+    getItem("ボード", "board"),
+  ]),
+  getItem("ユーザー", "sub1", <UserOutlined />, [
     getItem("Tom", "3"),
     getItem("Bill", "4"),
     getItem("Alex", "5"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-  getItem("Files", "9", <FileOutlined />),
+  getItem("アップロード", "upload", <FileOutlined />),
 ];
 
 export default function RootLayout({
@@ -50,36 +51,46 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const handleOnClick: MenuProps["onClick"] = (e) => {
+    const path = e.keyPath.reverse().join("/");
+    router.replace(baseUrl + path);
+  };
+
   return (
     <html lang="en">
       <body>
-        <Layout style={{ minHeight: "100vh" }}>
-          <Sider
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
-          >
-            <div className="demo-logo-vertical" />
-            <Menu
+        <AntdRegistry>
+          <Layout style={{ minHeight: "100vh" }}>
+            <Sider
+              collapsible
+              collapsed={collapsed}
+              onCollapse={(value) => setCollapsed(value)}
               theme="dark"
-              defaultSelectedKeys={["1"]}
-              mode="inline"
-              items={items}
-            />
-          </Sider>
-          <Layout>
-            {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
-            {children}
-            <Footer style={{ textAlign: "center" }}>
-              Ant Design ©{new Date().getFullYear()} Created by Ant UED
-            </Footer>
+            >
+              <div className="demo-logo-vertical" />
+              <Menu
+                theme="dark"
+                defaultSelectedKeys={["1"]}
+                mode="inline"
+                items={items}
+                onClick={handleOnClick}
+              />
+            </Sider>
+            <Layout>
+              {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
+              {children}
+              <Footer style={{ textAlign: "center" }}>
+                Ant Design ©{new Date().getFullYear()} Created by Ant UED
+              </Footer>
+            </Layout>
           </Layout>
-        </Layout>
+        </AntdRegistry>
       </body>
     </html>
   );

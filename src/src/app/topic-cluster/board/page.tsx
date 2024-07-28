@@ -1,7 +1,7 @@
 "use client";
 
 import { Layout, Menu, theme, Flex } from "antd";
-import Flow from "./components/Flow";
+import Flow from "../../components/Flow";
 import { useState } from "react";
 import { Node, Position } from "@xyflow/react";
 
@@ -28,6 +28,13 @@ export default function Home() {
       targetPosition: "top" as Position,
       position: { x: 200, y: 200 },
       data: { label: "node 3" },
+    },
+    {
+      id: "node-4",
+      type: "output",
+      targetPosition: "top" as Position,
+      position: { x: 200, y: 400 },
+      data: { label: "node 4" },
     },
   ];
 
