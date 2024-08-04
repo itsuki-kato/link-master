@@ -57,7 +57,7 @@ export default function RootLayout({
 
   const handleOnClick: MenuProps["onClick"] = (e) => {
     const path = e.keyPath.reverse().join("/");
-    router.replace(baseUrl + path);
+    router.push("/" + path);
   };
 
   return (
