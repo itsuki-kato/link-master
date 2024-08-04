@@ -13,7 +13,7 @@ export default function Management() {
       <div
         style={{
           padding: 24,
-          minHeight: "90vh",
+          minHeight: "100vh",
           background: colorBgContainer,
           borderRadius: borderRadiusLG,
         }}

@@ -52,10 +52,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const router = useRouter();
+
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
 
   const handleOnClick: MenuProps["onClick"] = (e) => {
     const path = e.keyPath.reverse().join("/");
@@ -73,7 +71,12 @@ export default function RootLayout({
               onCollapse={(value) => setCollapsed(value)}
               theme="dark"
             >
-              <div className="demo-logo-vertical" />
+              <div
+                className="demo-logo"
+                style={{ color: "white", padding: 30, fontWeight: "bold" }}
+              >
+                Link Master
+              </div>
               <Menu
                 theme="dark"
                 defaultSelectedKeys={["1"]}
@@ -85,9 +88,6 @@ export default function RootLayout({
             <Layout>
               {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
               {children}
-              <Footer style={{ textAlign: "center" }}>
-                Ant Design ©{new Date().getFullYear()} Created by Ant UED
-              </Footer>
             </Layout>
           </Layout>
         </AntdRegistry>
