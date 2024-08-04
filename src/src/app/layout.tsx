@@ -13,6 +13,7 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { baseUrl } from "@/common/constaints";
+import ApolloWrapper from "./providers/ApolloWrapper";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -62,34 +63,36 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AntdRegistry>
-          <Layout style={{ minHeight: "100vh" }}>
-            <Sider
-              collapsible
-              collapsed={collapsed}
-              onCollapse={(value) => setCollapsed(value)}
-              theme="dark"
-            >
-              <div
-                className="demo-logo"
-                style={{ color: "white", padding: 30, fontWeight: "bold" }}
-              >
-                Link Master
-              </div>
-              <Menu
+        <ApolloWrapper>
+          <AntdRegistry>
+            <Layout style={{ minHeight: "100vh" }}>
+              <Sider
+                collapsible
+                collapsed={collapsed}
+                onCollapse={(value) => setCollapsed(value)}
                 theme="dark"
-                defaultSelectedKeys={["1"]}
-                mode="inline"
-                items={items}
-                onClick={handleOnClick}
-              />
-            </Sider>
-            <Layout>
-              {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
-              {children}
+              >
+                <div
+                  className="demo-logo"
+                  style={{ color: "white", padding: 30, fontWeight: "bold" }}
+                >
+                  Link Master
+                </div>
+                <Menu
+                  theme="dark"
+                  defaultSelectedKeys={["1"]}
+                  mode="inline"
+                  items={items}
+                  onClick={handleOnClick}
+                />
+              </Sider>
+              <Layout>
+                {/* <Header style={{ padding: 0, background: colorBgContainer }} /> */}
+                {children}
+              </Layout>
             </Layout>
-          </Layout>
-        </AntdRegistry>
+          </AntdRegistry>
+        </ApolloWrapper>
       </body>
     </html>
   );
